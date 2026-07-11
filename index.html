@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pmosh</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <h1>pmosh</h1>
+    <p class="tagline">An SSH terminal for driving your own machines from your phone.</p>
+  </header>
+
+  <p>pmosh is an iOS terminal client. It connects over SSH to servers you configure yourself &mdash; a hostname and username you enter &mdash; and gives you a real terminal with tmux control mode, built for reconnecting to a running session cleanly on a mobile connection.</p>
+
+  <h2>How it works</h2>
+  <ul>
+    <li>Add a server: hostname and username, entered by you.</li>
+    <li>pmosh generates an ed25519 keypair on your device and shows you the public key.</li>
+    <li>You copy that key onto your own server's <code>authorized_keys</code> file.</li>
+    <li>pmosh connects over SSH and attaches to tmux in control mode, so your session survives being backgrounded or losing signal.</li>
+  </ul>
+
+  <h2>What pmosh does NOT do</h2>
+  <ul>
+    <li>It does not collect analytics, telemetry, or crash data.</li>
+    <li>It does not use accounts, sign-in, or any third-party service.</li>
+    <li>It does not transmit anything to the developer. Traffic goes only between your device and your own server.</li>
+    <li>It does not contain ads or trackers.</li>
+  </ul>
+
+  <h2>Privacy</h2>
+  <p>Your private key is generated on your device and stored in the iOS Keychain; it never leaves the device. Server settings are stored locally. There is no server of ours in the loop. Read the full <a href="privacy.html">privacy policy</a>.</p>
+
+  <nav>
+    <a href="privacy.html">Privacy</a>
+    <a href="support.html">Support</a>
+  </nav>
+</main>
+</body>
+</html>

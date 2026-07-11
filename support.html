@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pmosh &mdash; Support</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">pmosh</p>
+    <h1>Support</h1>
+    <p class="tagline">Questions about the app? Email us.</p>
+  </header>
+
+  <p><strong>Email:</strong> <a href="mailto:robertpgruber@icloud.com">robertpgruber@icloud.com</a></p>
+
+  <h2>Requirements</h2>
+  <p>You need a server you can SSH into, with <code>tmux</code> installed. pmosh drives tmux in control mode, so a running tmux session is what makes reconnects seamless.</p>
+
+  <h2>How to connect</h2>
+  <ol>
+    <li>In pmosh, add a server: enter its hostname and your username.</li>
+    <li>pmosh generates an ed25519 keypair on your device and shows you the public key.</li>
+    <li>Copy that public key onto your server, appended to <code>~/.ssh/authorized_keys</code> for that username.</li>
+    <li>Connect. pmosh attaches to (or starts) a tmux session in control mode.</li>
+  </ol>
+
+  <h2>Common questions</h2>
+
+  <h3>"Key not authorized" / permission denied</h3>
+  <p>Make sure the public key pmosh showed you was copied in full, on its own line, into <code>~/.ssh/authorized_keys</code> for the exact username you configured &mdash; and that the file and your <code>~/.ssh</code> directory have the permissions your SSH server requires (typically <code>700</code> for the directory, <code>600</code> for the file).</p>
+
+  <h3>"Host unreachable"</h3>
+  <p>Check that the hostname is correct and reachable from your device's current network, that the SSH server is running, and that nothing on your network or the server (firewall, VPN, tailnet) is blocking the connection.</p>
+
+  <h3>Do I need tmux specifically?</h3>
+  <p>Yes. pmosh uses tmux's control mode to keep your session alive across backgrounding and network changes, so your server needs tmux installed and reachable over SSH.</p>
+
+  <h3>Where is my data stored?</h3>
+  <p>On your device only. See the <a href="privacy.html">privacy policy</a> for details.</p>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</main>
+</body>
+</html>
