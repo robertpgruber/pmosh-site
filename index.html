@@ -3,36 +3,66 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>pmosh</title>
+<title>pmosh — Claude Code, tmux and your own server, on your phone</title>
+<meta name="description" content="pmosh is an iPhone and iPad SSH terminal that attaches to the tmux session already running on your server. Native flick scrollback, a real Esc/Ctrl/arrows toolbar, no accounts, no telemetry.">
+<meta property="og:title" content="pmosh — an iPhone terminal for your tmux session">
+<meta property="og:description" content="Attach to the tmux session already running on your own server. Built for driving Claude Code and other CLI tools from a phone.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://robertpgruber.github.io/pmosh-site/">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <main>
   <header>
     <h1>pmosh</h1>
-    <p class="tagline">An SSH terminal for driving your own machines from your phone.</p>
+    <p class="tagline">Claude Code, tmux and your own server, on your phone.</p>
+    <p class="cta">
+      <a class="store" href="https://apps.apple.com/app/id6788939205">Download on the App Store</a>
+      <span class="fine">Free. iPhone and iPad, iOS 17+.</span>
+    </p>
   </header>
 
-  <p>pmosh is an iOS terminal client. It connects over SSH to servers you configure yourself &mdash; a hostname and username you enter &mdash; and gives you a real terminal with tmux control mode, built for reconnecting to a running session cleanly on a mobile connection.</p>
+  <p>pmosh is an SSH terminal that attaches to the tmux session <em>already running</em> on a machine you own, using tmux control mode. What you see on the phone is the same session that is on your server: the same Claude Code run, the same build, the same shell. Nothing is copied, proxied or re-hosted.</p>
 
-  <h2>How it works</h2>
+  <h2>Why it exists</h2>
+  <p>Long-running CLI tools live in tmux. Checking on them from a phone usually means a generic SSH app, a cramped keyboard with no Esc or Ctrl, and a terminal that fights you when you try to scroll. pmosh was built for exactly that moment: answer the prompt, read what happened, scroll back through a few hundred lines, put the phone away.</p>
+
+  <h2>What you get</h2>
   <ul>
-    <li>Add a server: hostname and username, entered by you.</li>
-    <li>pmosh generates an ed25519 keypair on your device and shows you the public key.</li>
-    <li>You copy that key onto your own server's <code>authorized_keys</code> file.</li>
-    <li>pmosh connects over SSH and attaches to tmux in control mode, so your session survives being backgrounded or losing signal.</li>
+    <li><strong>The session you already have.</strong> <code>tmux -CC</code> control mode attaches to your running session; it survives backgrounding, lost signal and reconnects.</li>
+    <li><strong>Scrollback you flick through.</strong> History renders as a native scrolling list, not a terminal scroll region. tmux copy-mode is one tap away when you want it.</li>
+    <li><strong>A keyboard for the CLI.</strong> Esc, Ctrl, arrows, page up and down, and the tmux keys sit in a toolbar above the iOS keyboard. Hardware keyboards work too.</li>
+    <li><strong>Keys, not passwords.</strong> An ed25519 keypair is generated on the device and kept in the iOS Keychain. You paste the public key into <code>authorized_keys</code>. Host keys are pinned on first connect.</li>
+    <li><strong>Nothing in the middle.</strong> No accounts, no sign-in, no analytics, no server of ours. The only connection the app makes is the SSH connection to the host you typed in.</li>
   </ul>
 
-  <h2>What pmosh does NOT do</h2>
-  <ul>
-    <li>It does not collect analytics, telemetry, or crash data.</li>
-    <li>It does not use accounts, sign-in, or any third-party service.</li>
-    <li>It does not transmit anything to the developer. Traffic goes only between your device and your own server.</li>
-    <li>It does not contain ads or trackers.</li>
-  </ul>
+  <h2>Setup in three steps</h2>
+  <ol>
+    <li>Enter your server's hostname and your username.</li>
+    <li>Tap <em>Copy public key</em> and append it to <code>~/.ssh/authorized_keys</code> on the server.</li>
+    <li>Tap <em>Connect</em>. pmosh attaches to (or creates) the tmux session <code>main</code>.</li>
+  </ol>
+  <p class="fine">Requirements: a server you control with an SSH daemon and tmux installed. macOS and Linux hosts both work.</p>
 
-  <h2>Privacy</h2>
-  <p>Your private key is generated on your device and stored in the iOS Keychain; it never leaves the device. Server settings are stored locally. There is no server of ours in the loop. Read the full <a href="privacy.html">privacy policy</a>.</p>
+  <h2>Pricing</h2>
+  <p><strong>Free forever:</strong> one terminal tab with the full feature set. That is the whole app for most people.</p>
+  <p><strong>pmosh Pro:</strong> unlimited tabs, each its own tmux session. $3.99 per month or $29.99 per year, with a 7-day free trial. Nothing else is gated. Auto-renews until cancelled in Settings; cancel any time.</p>
+
+  <h2>Questions</h2>
+  <dl>
+    <dt>Does it work without tmux?</dt>
+    <dd>No. pmosh is a tmux control-mode client; tmux on the server is what makes the session persistent and the scrollback native.</dd>
+    <dt>Is it mosh?</dt>
+    <dd>No, despite the name. It is SSH plus tmux control mode. Reconnects re-attach to the same session.</dd>
+    <dt>Which servers?</dt>
+    <dd>Anything with sshd and tmux: Linux boxes, Macs, VPSes, a Raspberry Pi. Tailscale and other private networks work like any other SSH host.</dd>
+    <dt>Where does my key live?</dt>
+    <dd>On your phone, in the iOS Keychain. It never leaves the device and is never sent to us, because there is no "us" in the connection.</dd>
+  </dl>
+
+  <p class="cta">
+    <a class="store" href="https://apps.apple.com/app/id6788939205">Download on the App Store</a>
+  </p>
 
   <nav>
     <a href="privacy.html">Privacy</a>

@@ -97,3 +97,22 @@ nav {
 }
 
 nav a { margin-right: 16px; }
+
+/* landing page additions (2026-09-17) */
+.cta { margin: 20px 0 0; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+a.store {
+  display: inline-block;
+  background: var(--fg);
+  color: var(--bg);
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-weight: 600;
+  font-size: 15px;
+}
+a.store:hover { background: var(--accent); color: #fff; }
+.fine { color: var(--muted); font-size: 14px; }
+ol { padding-left: 22px; margin: 0 0 16px; }
+dl { margin: 0 0 16px; }
+dt { font-weight: 600; margin-top: 12px; }
+dd { margin: 4px 0 0 0; color: var(--fg); }
