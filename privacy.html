@@ -11,25 +11,35 @@
   <header>
     <p class="eyebrow">pmosh</p>
     <h1>Privacy Policy</h1>
-    <p class="tagline">Effective July 10, 2026.</p>
+    <p class="tagline">Effective October 4, 2026 (adds the optional pmosh account, version 1.5.0).</p>
   </header>
 
   <h2>Summary</h2>
-  <p>pmosh does not collect, store, or transmit any personal data. There is no account, no analytics, no tracking, no third-party services, and no advertising. pmosh connects only to servers you explicitly configure, over SSH, using a key that is generated on and never leaves your device.</p>
+  <p>pmosh does not collect, store, or transmit any personal data to us. There is no pmosh server, no analytics, no tracking, no third-party services, and no advertising. pmosh connects only to servers you explicitly configure, over SSH, using a key generated on your device. If you choose to create a pmosh account (Sign in with Apple), your settings and that key move between your own Apple devices through your own iCloud &mdash; never through us.</p>
 
   <h2>What pmosh stores on your device</h2>
   <p>When you add a server, pmosh stores the following on your device only:</p>
   <ul>
     <li>The hostname and username you enter, saved locally via iOS <code>UserDefaults</code>.</li>
-    <li>An ed25519 keypair, generated on your device. The private key is stored in the iOS Keychain and never leaves your device. You are responsible for authorizing the public key on your own server; pmosh does not transmit it anywhere on your behalf.</li>
+    <li>An ed25519 keypair, generated on your device. The private key is stored in the iOS Keychain and, unless you create a pmosh account, never leaves your device. You are responsible for authorizing the public key on your own server; pmosh does not transmit it anywhere on your behalf.</li>
+    <li>Your key-row layout, the two behavior toggles, and the fingerprints of server keys you have connected to (so a changed server key is detected).</li>
   </ul>
   <p>This data lives in the app's sandbox on your device. We do not have access to it.</p>
+
+  <h2>The optional pmosh account (Sign in with Apple)</h2>
+  <p>Since version 1.5.0 you can sign in with Apple to make one pmosh follow you across your iPhones and iPads. The account is optional; every feature works without it.</p>
+  <ul>
+    <li><strong>What we receive:</strong> nothing. Sign in with Apple hands the app an opaque, app-specific identifier and (the first time) your name. Both stay on your devices and in your iCloud. pmosh runs no server, so there is nowhere for them to be sent, and we cannot see who has an account.</li>
+    <li><strong>What syncs, and how:</strong> your host, port, username, tmux session name, key-row layout, the behavior toggles and your pinned server-key fingerprints are stored in iCloud key-value storage, namespaced by a hash of that identifier. Your SSH private key is stored as a synchronizable item in iCloud Keychain, which Apple end-to-end encrypts between your devices. All of this is your own iCloud account, governed by <a href="https://www.apple.com/legal/privacy/">Apple's privacy policy</a>; we have no access to it.</li>
+    <li><strong>Signing out</strong> leaves the account's data in your iCloud and returns the device to its own key.</li>
+    <li><strong>Deleting the account</strong> (Settings &rarr; Account &rarr; Delete account) removes the account's data from iCloud key-value storage and the shared key from iCloud Keychain, and signs every device out. To also withdraw pmosh's Sign in with Apple grant, use iOS Settings &rarr; your name &rarr; Sign in with Apple.</li>
+  </ul>
 
   <h2>What pmosh does NOT do</h2>
   <ul>
     <li>It does not transmit any data to us, our team, or any third party.</li>
     <li>It does not use analytics, telemetry, or crash reporting.</li>
-    <li>It does not require an account, email, password, or sign-in.</li>
+    <li>It does not require an account, email, password, or sign-in. The optional account requests only your name and uses your own iCloud.</li>
     <li>It does not contain advertising or trackers.</li>
     <li>It does not connect to any server other than the ones you configure.</li>
   </ul>
@@ -38,8 +48,8 @@
   <p>pmosh connects via SSH only to the hostname and username you specify. Authentication uses the ed25519 keypair generated on your device; you authorize the public key manually on your own server. Terminal content &mdash; everything you see and type &mdash; flows directly between your device and your server over that SSH connection. It does not pass through us or any intermediary.</p>
 
   <h2>Deletion</h2>
-  <p>There is nothing stored server-side to delete, because nothing is ever sent to a server we operate. To remove your data, delete a server entry in the app, or delete the app entirely &mdash; iOS removes all local data and the Keychain-stored keypair with it.</p>
-  <p>There is no account to delete because no account is created.</p>
+  <p>There is nothing stored on our side to delete, because nothing is ever sent to a server we operate. To remove your local data, delete the app &mdash; iOS removes all local data and the device keypair with it.</p>
+  <p>If you created a pmosh account, delete it in the app (Settings &rarr; Account &rarr; Delete account); that removes its data from your iCloud and signs every device out. Deleting the app alone does not remove iCloud data.</p>
 
   <h2>Children</h2>
   <p>pmosh is not directed at children under 13.</p>
