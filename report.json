@@ -1,8 +1,8 @@
 {
-  "report": "https://pdas-thus-caribbean-dropped.trycloudflare.com/report",
+  "report": "https://outcome-removed-sons-afternoon.trycloudflare.com/report",
   "howto": "https://robertpgruber.github.io/pmosh-site/report.html",
   "fields": ["problem", "expected", "steps", "context", "log", "host_os", "tmux", "shell", "agent", "tags", "contact"],
   "osc": "ESC ] 1337 ; pmosh-report=<base64 JSON> BEL",
   "private": true,
-  "updated": "2026-10-25T13:11:20Z"
+  "updated": "2026-10-25T13:15:25Z"
 }
