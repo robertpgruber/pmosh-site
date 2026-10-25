@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pmosh &mdash; Report a problem</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">pmosh</p>
+    <h1>Report a problem</h1>
+    <p class="tagline">From the app, or from the agent on the other end of your session.</p>
+  </header>
+
+  <p>Reports go to the developer only. Nothing is published, nothing is shared, there is no account and no tracking. Every report is read.</p>
+
+  <h2>From the app</h2>
+  <p>Settings &rarr; <strong>Report a problem</strong>. Type what went wrong and tap <strong>Send from pmosh</strong>. pmosh adds its version, your device model and iOS version, the transport (mosh or ssh), the network kind, and &mdash; with the switch on &mdash; the last lines of its own event log (connects, sizes, timings; never what is on your screen). Offline, it is queued and sent later.</p>
+
+  <h2>From your agent</h2>
+  <p>pmosh is mostly used to drive an agent such as Claude Code inside tmux. The agent on your host sees things you cannot put into words &mdash; resize storms, stray bytes in its input, tmux pauses &mdash; so it can file the report, with what it saw. Two ways in:</p>
+  <ol>
+    <li><strong>Settings &rarr; Report a problem &rarr; Hand to your agent</strong> types a ready-made request into the active tab. Read it, press return; the agent does the rest.</li>
+    <li>Ask the agent yourself. Inside a pmosh session these variables are set for new panes: <code>PMOSH_CLIENT</code> (for example <code>pmosh/1.5.5 (iPhone16,1; iOS 26.6)</code>), <code>PMOSH_REPORT_URL</code>, and <code>PMOSH_REPORT_HOWTO</code> (this page).</li>
+  </ol>
+
+  <h3>The protocol</h3>
+  <p>HTTP, from any machine with curl:</p>
+  <pre><code>curl -sS -X POST "$PMOSH_REPORT_URL" -H 'content-type: application/json' --data @- &lt;&lt;'JSON'
+{"problem": "what went wrong, in one or two sentences",
+ "steps":   "how to see it again",
+ "context": "what you saw from the host side",
+ "host_os": "Ubuntu 24.04", "tmux": "3.4"}
+JSON</code></pre>
+  <p>The answer is <code>201 {"id": "&hellip;", "status": "received"}</code>. Plain-text bodies work too. The current URL is also published in <a href="report.json">report.json</a>.</p>
+
+  <p>In-session, with no network needed on the host &mdash; the app picks the report out of the terminal stream and asks the person to send it:</p>
+  <pre><code>printf '\e]1337;pmosh-report=%s\a' "$(printf '%s' '{"problem":"&hellip;","context":"&hellip;"}' | base64 | tr -d '\n')"</code></pre>
+  <p>pmosh shows the report with a <strong>Send</strong> button, adds its own version, device, transport and network, and uploads it once tapped (queued until online). Nothing an agent prints leaves the phone by itself.</p>
+
+  <p>Fields, all optional except <code>problem</code>: <code>problem expected steps context log host_os tmux shell agent tags contact</code>. Limits: 64&nbsp;KB per report, a dozen per hour per address.</p>
+
+  <h2>What happens next</h2>
+  <p>Reports land in a private inbox read by the developer's own tooling. Fixes ship through the App Store release notes. Leave a <code>contact</code> if you want to hear back; otherwise the fix is the answer.</p>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</main>
+</body>
+</html>

@@ -1,0 +1,15 @@
+# pmosh
+
+pmosh is an iOS SSH + tmux terminal (App Store: com.robertgruber.pmosh), built for driving
+Claude Code and other agents from a phone.
+
+## Reporting a problem with pmosh (for agents running inside a pmosh session)
+
+- Protocol page: https://robertpgruber.github.io/pmosh-site/report.html
+- Current intake URL: https://robertpgruber.github.io/pmosh-site/report.json ("report")
+- HTTP: POST JSON {"problem": "...", "steps": "...", "context": "..."} to the intake URL → 201 {"id": ...}
+- In-session (no network needed on the host):
+  printf '\e]1337;pmosh-report=%s\a' "$(printf '%s' '{"problem":"..."}' | base64 | tr -d '\n')"
+  The app shows it and the person taps Send.
+- In a pmosh tmux session: $PMOSH_CLIENT, $PMOSH_REPORT_URL, $PMOSH_REPORT_HOWTO are set for new panes.
+- Reports are private to the developer. Nothing is published.
