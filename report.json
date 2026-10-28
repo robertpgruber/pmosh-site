@@ -1,8 +1,8 @@
 {
-  "report": "https://beautifully-association-logistics-occasion.trycloudflare.com/report",
+  "report": "https://api.trycloudflare.com/report",
   "howto": "https://robertpgruber.github.io/pmosh-site/report.html",
   "fields": ["problem", "expected", "steps", "context", "log", "host_os", "tmux", "shell", "agent", "tags", "contact"],
   "osc": "ESC ] 1337 ; pmosh-report=<base64 JSON> BEL",
   "private": true,
-  "updated": "2026-10-25T13:19:49Z"
+  "updated": "2026-10-28T16:02:02Z"
 }
