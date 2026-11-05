@@ -3,6 +3,20 @@
 pmosh is an iOS SSH + tmux terminal (App Store: com.robertgruber.pmosh), built for driving
 Claude Code and other agents from a phone.
 
+## Putting text on the person's iPhone clipboard (for agents running inside a pmosh session)
+
+pmosh puts text a program in its pane copies with OSC 52 on the iPhone clipboard and shows
+"Copied from the host". Claude Code's /copy already does this. From a tool shell that is not the
+pane's terminal, write the sequence to the pane's tty:
+
+  printf '\033]52;c;%s\033\\' "$(printf '%s' 'TEXT' | base64 | tr -d '\n')" > "$(tmux display -p -t "$TMUX_PANE" '#{pane_tty}')"
+
+- Text only (UTF-8), up to 1 MiB. The same text sent twice within 2 s is copied once.
+- iOS lets pmosh write the clipboard only while it is on screen; a copy sent while it is in the
+  background lands the next time the person opens pmosh.
+- The person can turn it off: Settings › Behavior › Copy from host to clipboard.
+- pmosh never answers an OSC 52 read, so the phone's clipboard can't be read from the host.
+
 ## Reporting a problem with pmosh (for agents running inside a pmosh session)
 
 - Protocol page: https://robertpgruber.github.io/pmosh-site/report.html
