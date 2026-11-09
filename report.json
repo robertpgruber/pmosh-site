@@ -1,8 +1,8 @@
 {
-  "report": "https://cult-asks-explicitly-editors.trycloudflare.com/report",
+  "report": "https://cordless-cent-identification-pubs.trycloudflare.com/report",
   "howto": "https://robertpgruber.github.io/pmosh-site/report.html",
   "fields": ["problem", "expected", "steps", "context", "log", "host_os", "tmux", "shell", "agent", "tags", "contact"],
   "osc": "ESC ] 1337 ; pmosh-report=<base64 JSON> BEL",
   "private": true,
-  "updated": "2026-11-02T23:02:05Z"
+  "updated": "2026-11-09T15:11:14Z"
 }
